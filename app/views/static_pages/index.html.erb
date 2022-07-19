@@ -1,0 +1,20 @@
+<h1>StaticPages</h1>
+<div>
+<%= form_with url: '/', method: :get do |f| %>
+  <p>Please enter a flickr ID below to display their photos:</p>
+  <p><%= f.text_field :user_id, placeholder: 'User Id' %></p>
+  <p><%= f.submit 'Submit' %></p>
+<% end %>
+</div>
+
+<div>
+<% if @photos %>
+  <% if @photos.size.zero? %>
+    <p>No public photos to display :(</p>
+  <% else %>
+    <% @photos.each do |p| %>
+    <%= link_to(image_tag(Flickr.url_q(p)), Flickr.url_photopage(p)) %>
+    <% end %>
+  <% end %>
+<% end %>
+</div>
